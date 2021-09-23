@@ -14,9 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
-//Auth::routes();
+Auth::routes();
 
 
 //ログアウト中のページ
@@ -38,3 +38,28 @@ Route::get('/search','UsersController@index');
 
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
+
+// ログアウト
+Route::get('/logout', [
+    'uses' => 'UsersController@logout',
+    'as' => '/logout'
+]);
+
+
+// Route::group(['prefix' => 'user'], function() {
+
+//   Route::group(['middleware' => 'auth'], function(){
+
+//   // ユーザープロファイル
+//   Route::get('/profile',[
+//     'uses' => 'UserController@getProfile',
+//     'as' => 'user.profile'
+//   ]);
+
+//   // ログアウト
+//   Route::get('/logout',[
+//     'uses' => 'UserController@getLogout',
+//     'as' => 'user.logout'
+//   ]);
+
+// });
