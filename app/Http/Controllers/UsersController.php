@@ -9,15 +9,28 @@ class UsersController extends Controller
 {
     //
     public function profile(){
-        return view('users.profile');
+        $user = \DB::table('users')
+        ->where('id', Auth::id())
+        ->first();
+
+        return view('users.profile',[
+            'user'=>$user
+        ]);
     }
+
+    public function login()
+    {
+        $auth = Auth::user();
+        return view('user.login',['auth' => $auth]);
+    }
+
     public function search(){
         return view('users.search');
     }
 
     public function logout()
     {
-        // unset($_SESSION('username'));
+        // unset($_SESSION);
         Auth::logout();
         return redirect('login');
     }

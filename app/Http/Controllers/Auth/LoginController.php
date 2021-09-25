@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller, Session;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-    use Auth;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -51,6 +51,14 @@ class LoginController extends Controller
         }
         return view("auth.login");
     }
+
+//    public function loginName($id)
+//     {
+//         $name = DB::table('users')
+//         ->where('id', $id)
+//         ->first();
+//         return view('login')->with('name',$name);
+//     }
 
     // protected function redirectTo() {
     //     $username = Auth::username();

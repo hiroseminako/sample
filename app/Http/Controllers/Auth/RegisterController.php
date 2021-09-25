@@ -85,7 +85,15 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
+    // 新規登録後、ユーザー情報を取得して表示させる
     public function added(){
-        return view('auth.added');
+        // $list = \DB::table('users')
+        // ->where('id', Auth::id())
+        // ->first();
+
+        $auth = Auth::user();
+        return view('auth.added',[
+            'list'=>$list
+        ]);
     }
 }

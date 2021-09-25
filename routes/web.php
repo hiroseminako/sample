@@ -39,6 +39,9 @@ Route::get('/search','UsersController@index');
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
 
+// Route::get('/login','Auth\LoginController@loginName');
+
+
 // ログアウト
 Route::get('/logout', [
     'uses' => 'UsersController@logout',
