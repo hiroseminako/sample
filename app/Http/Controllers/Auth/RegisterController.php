@@ -87,7 +87,7 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
-    // 新規登録後、ユーザー情報を取得して表示させる
+    // 新規登録後、ユーザー情報を取得して表示させる→セッション？？
     public function added(){
         $auth = Auth::user();
         $list = \DB::table('users')
@@ -96,4 +96,19 @@ class RegisterController extends Controller
 
         return view('auth.added', compact('list'));
     }
+    // public function ses_get(Request $request)
+    // {
+    //     $sesdata = $request->session()->get('msg');
+    //     return view('auth.register', ['session_data' => $sesdata]);
+    // }
+    // public function added(Request $request)
+    // {
+    //     $msg = $request->input;
+    //     $request->session()->put('msg', $msg);
+    //     return redirect('added.session');
+    // }
+    // protected function guard()
+    // {
+    //     return Auth::guard('guard-name');
+    // }
 }
