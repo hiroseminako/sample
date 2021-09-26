@@ -8,6 +8,125 @@ header{
     background:#3C4767;
 }
 
+/* 共通部分 */
+#head,
+#row{
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* header部部分のflexbox */
+#head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    vertical-align: middle;
+}
+.menu{
+    flex-basis: 20%;
+}
+
+/* アコーディオンメニュー */
+.menu {
+    width: 100%;
+    padding: 10px;
+}
+.menu input {
+    display: none; /*チェックボックスを隠す*/
+}
+.menu_label{
+    cursor :pointer;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    line-height: 1;
+    position: relative;
+    background-color: #3C4767;
+    vertical-align: middle;
+    height: 55px;
+}
+.menu_label p{
+    position: absolute;
+    vertical-align: middle;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit- transform: translateY(-50%);
+    left: 0;
+    margin: auto;
+    padding-right: 10px;
+}
+.menu_label img{
+    vertical-align: middle;
+    position: absolute;
+    right: 0;
+}
+.menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-bottom: 1px;
+}
+.menu li {
+    height: 0;
+    overflow-y: hidden;
+    transition: padding-bottom 0.5s, padding-top 0.5s; /*閉じるときのアニメーション*/
+    -webkit-transition: padding-bottom 0.5s, padding-top 0.5s
+    -moz-transition: padding-bottom 0.5s, padding-top 0.5s;
+    -ms-transition: padding-bottom 0.5s, padding-top 0.5s;
+    -o-transition: padding-bottom 0.5s, padding-top 0.5s;
+}
+.menu li a{
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 10px 0;
+}
+#menu_bar:checked ~ #links li {
+  height: auto; /*開いたときに表示されるliの高さ*/
+  opacity: 1;
+  background: #f1f1f1;
+  padding: 10px;
+}
+ /*開いたときの下の余白*/
+#menu_bar:checked ~ #links li:last-child {
+  margin-bottom: 20px;
+}
+/* 閉じている時の矢印 */
+.menu_label span:after{
+    content:"";
+    display:block;
+    width:8px;
+    height:8px;
+    border-top: #fff 2px solid;
+    border-right: #fff 2px solid;
+    -webkit-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    transform: rotate(135deg);
+    position:absolute;
+    right: 40%;
+    top: 0;
+    bottom: 15%;
+    margin: auto;
+}
+/*開いている時の矢印*/
+.menu input[type=checkbox]:checked + .menu_label span:after{
+  content:"";
+  display:block;
+  width:8px;
+  height:8px;
+  border-top: #fff 2px solid;
+  border-right: #fff 2px solid;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  position:absolute;
+  right: 40%;
+  top: 7%;
+  bottom: 0;
+  margin: auto;
+}
+
+
 /* main content */
 #row{
     display: flex;

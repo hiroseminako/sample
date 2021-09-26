@@ -21,7 +21,7 @@ class UsersController extends Controller
     public function login()
     {
         $auth = Auth::user();
-        return view('user.login',['auth' => $auth]);
+        return view('users.login',['auth' => $auth]);
     }
 
     public function search(){

@@ -27,6 +27,7 @@ Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/added', 'Auth\RegisterController@added');
+Route::post('/added', 'Auth\RegisterController@added');
 
 
 //ログイン中のページ

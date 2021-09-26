@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -35,6 +36,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
+    // ログイン後もアクセス可
     public function __construct()
     {
         $this->middleware('guest');
@@ -49,9 +51,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => ['required', 'string', 'max:255'],
-            'mail' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:4', 'confirmed']
+            'username' => 'required|string|max:255',
+            'mail' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:4|confirmed',
         ]);
     }
 
@@ -87,13 +89,11 @@ class RegisterController extends Controller
 
     // 新規登録後、ユーザー情報を取得して表示させる
     public function added(){
-        // $list = \DB::table('users')
-        // ->where('id', Auth::id())
-        // ->first();
-
         $auth = Auth::user();
-        return view('auth.added',[
-            'list'=>$list
-        ]);
+        $list = \DB::table('users')
+        ->where('id', Auth::id())
+        ->first();
+
+        return view('auth.added', compact('list'));
     }
 }

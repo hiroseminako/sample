@@ -6,7 +6,7 @@
 
 <p>DAWNSNSへようこそ</p>
 
-{{ Form::label('e-mail') }}
+{{ Form::label('MailAddress') }}
 {{ Form::text('mail',null,['class' => 'input']) }}
 {{ Form::label('password') }}
 {{ Form::password('password',['class' => 'input']) }}
