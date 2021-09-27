@@ -3,9 +3,18 @@ html{
 }
 body{
 }
+
+
+
+
+
+/* ログイン後のトップページ */
 /* header */
 header{
     background:#3C4767;
+}
+#container{
+    color: #fff;
 }
 
 /* 共通部分 */

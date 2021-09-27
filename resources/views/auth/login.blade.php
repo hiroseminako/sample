@@ -2,6 +2,8 @@
 
 @section('content')
 
+<div class="login_page">
+
 {!! Form::open(['url' => '/login']) !!}
 
 <p>DAWNSNSへようこそ</p>
@@ -16,5 +18,7 @@
 <p><a href="/register">新規ユーザーの方はこちら</a></p>
 
 {!! Form::close() !!}
+
+</div>
 
 @endsection

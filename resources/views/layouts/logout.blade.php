@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="ページの内容を表す文章" />
     <title></title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/logout.css">
     <!--スマホ,タブレット対応-->
@@ -20,6 +21,7 @@
     <!--OGPタグ/twitterカード-->
 </head>
 <body>
+    <div class="logout_container">
     <header>
         <h1><img src="images/main_logo.png"></h1>
         <p>Social Network Service</p>
@@ -29,5 +31,6 @@
     </div >
     <script src="JavaScriptファイルのURL"></script>
     <script src="JavaScriptファイルのURL"></script>
+    </div>
 </body>
 </html>

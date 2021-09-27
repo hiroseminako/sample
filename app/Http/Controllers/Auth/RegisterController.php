@@ -89,7 +89,7 @@ class RegisterController extends Controller
 
     // 新規登録後、ユーザー情報を取得して表示させる→セッション？？
     public function added(){
-        $auth = Auth::user();
+        // $auth = Auth::user();
         $list = \DB::table('users')
         ->where('id', Auth::id())
         ->first();
