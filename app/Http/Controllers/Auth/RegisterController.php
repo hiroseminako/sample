@@ -82,33 +82,14 @@ class RegisterController extends Controller
             $data = $request->input();
 
             $this->create($data);
-            return redirect('added');
+            return redirect('added')->with('data', $data['username']);
         }
         return view('auth.register');
     }
 
-    // 新規登録後、ユーザー情報を取得して表示させる→セッション？？
-    public function added(){
-        // $auth = Auth::user();
-        $list = \DB::table('users')
-        ->where('id', Auth::id())
-        ->first();
-
-        return view('auth.added', compact('list'));
+    // 新規登録後、ユーザー情報を取得して名前を表示させる
+    public function added(Request $request){
+        return view('auth.added');
     }
-    // public function ses_get(Request $request)
-    // {
-    //     $sesdata = $request->session()->get('msg');
-    //     return view('auth.register', ['session_data' => $sesdata]);
-    // }
-    // public function added(Request $request)
-    // {
-    //     $msg = $request->input;
-    //     $request->session()->put('msg', $msg);
-    //     return redirect('added.session');
-    // }
-    // protected function guard()
-    // {
-    //     return Auth::guard('guard-name');
-    // }
+
 }
