@@ -22,7 +22,7 @@
 <body>
     <header>
         <div id = "head">
-            <h1><a href="/top"><img src="images/main_logo.png"></a></h1>
+            <h1 class="logo"><a href="/top"><img src="images/main_logo.png"></a></h1>
             <div class="menu">
                 <input id="menu_bar" type="checkbox">
                 <label class="menu_label" for="menu_bar"><p>{{ Auth::user() -> username }}さん</p><span></span><img src="images/dawn.png"></label>
@@ -43,12 +43,12 @@
                 <p>{{ Auth::user() -> username }}さんの</p>
                 <div>
                 <p>フォロー数</p>
-                <p>〇〇名</p>
+                <p>名</p>
                 </div>
                 <p class="btn"><a href="">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
-                <p>〇〇名</p>
+                <p>名</p>
                 </div>
                 <p class="btn"><a href="">フォロワーリスト</a></p>
             </div>

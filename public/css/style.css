@@ -5,9 +5,6 @@ body{
 }
 
 
-
-
-
 /* ログイン後のトップページ */
 /* header */
 header{
@@ -89,6 +86,9 @@ header{
     color: black;
     text-align: center;
     padding: 10px 0;
+}
+#links li a:hover{
+    background-color: #ff4500;
 }
 #menu_bar:checked ~ #links li {
   height: auto; /*開いたときに表示されるliの高さ*/

@@ -29,6 +29,8 @@ Route::post('/register', 'Auth\RegisterController@register');
 Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
+Route::post('/added', 'Auth\RegisterController@added');
+
 //ログイン中のページ
 Route::get('/top','PostsController@index');
 
@@ -39,14 +41,23 @@ Route::get('/search','UsersController@index');
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
 
-// Route::get('/login','Auth\LoginController@loginName');
-
-
 // ログアウト
 Route::get('/logout', [
     'uses' => 'UsersController@logout',
     'as' => '/logout'
 ]);
+
+// フォロー数、フォロワー数
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/show', 'FollowsController@show');
+});
+
+
+
+
+
+
+
 
 
 // Route::group(['prefix' => 'user'], function() {
