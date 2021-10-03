@@ -27,6 +27,30 @@ class UsersController extends Controller
         return view('users.login',['auth' => $auth]);
     }
 
+    // フォローする
+    public function follow(User $user, $id)
+    {
+        $user = User::find($id);
+        $follower = Auth::user();
+        $is_following = $follower->isFollowing($user);
+        if(!$is_following){
+            $follower->follow($user->id);
+        }
+        return back();
+    }
+
+    // フォロー解除する
+    public function unfollow(User $user, $id)
+    {
+        $user = User::find($id);
+        $follower = Auth::user();
+        $is_following = $follower->isFollowing($user);
+        if($is_following){
+            $$follower->unfollow($user->id);
+        }
+        return back();
+    }
+
     public function search(){
         return view('users.search');
     }
@@ -37,4 +61,20 @@ class UsersController extends Controller
         Auth::logout();
         return redirect('login');
     }
+
+    // //フォロー
+    // public function follow(User $user,$id)
+    // {
+    //     $user = User::find($id);
+    //     //var_dump($user);
+    //     $follower = auth()->user();
+    //     //フォローしているか
+    //     $is_following = $follower->isFollowing($user->id);
+    //      if(!$is_following) {
+    //         //フォローしていなければする
+    //          $follower->follow($user->id);
+    //          return back();
+    //      }
+    //     //return view('sample');
+    // }
 }

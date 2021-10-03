@@ -36,15 +36,19 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        // ログイン認証（一度ログインしたらログインページにアクセスすると、ログイン後のトップページに飛ぶ）
         $this->middleware('guest')->except('logout');
     }
 
     public function login(Request $request){
+        // HTTPがPOSTのデータだった場合、trueを返す
         if($request->isMethod('post')){
 
+            // mail, passwordのみ引っ張ってくる
             $data=$request->only('mail','password');
             // ログインが成功したら、トップページへ
             //↓ログイン条件は公開時には消すこと
+            // Auth::attempt()→認証処理をする。メールアドレスやパスワードをkey, valueの形で渡す
             if(Auth::attempt($data)){
                 return redirect('/top');
             }

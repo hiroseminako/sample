@@ -8,16 +8,16 @@ class Follow extends Model
 {
     // フォロー数、フォロワー数のカウント
     protected $fillable = [
-        'following_id', 'followed_id'
+        'follow', 'follower'
     ];
 
     public function getFollowCount($user_id)
     {
-        return $this->where('following_id', '<>', $user_id)->count();
+        return $this->where('follow', '<>', $user_id)->count();
     }
 
     public function getFollowerCount($user_id)
     {
-        return $this->where('followed_id', '<>', $user_id)->count();
+        return $this->where('follower', '<>', $user_id)->count();
     }
 }

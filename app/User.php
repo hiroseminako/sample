@@ -27,29 +27,45 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // フォロワーの取得
+    public function followers(){
+        return $this->belognsToMany(self::class, 'follows', 'follower', 'follow');
+    }
+
+    // フォローしているユーザーの取得
+    public function follows(){
+        return $this->belognsToMany(self::class, 'follows', 'follow', 'follower');
+    }
+
     //フォローする
-    public function follow($user_id)
+    public function follow(Int $user_id)
     {
         return $this->follows()->attach($user_id);
     }
 
     //フォロー解除する
-    public function unfollow($user_id)
+    public function unfollow(Int $user_id)
     {
         return $this->follows()->detach($user_id);
     }
 
     // フォローしているか
-    public function isFollowing($user_id)
+    public function isFollowing(Int $user_id)
     {
-        return (boolean) $this->follows()->where('followed_id', $user_id)->exists();
+        // return (boolean) $this->follows()->where('followed_id', $user_id)->exists();
+        return (boolean) $this->follows()->where('follower', $user_id)->exists();
     }
 
     // フォローされているか
     public function isFollowed(Int $user_id)
     {
-        return (boolean) $this->followers()->where('following_id', $user_id)->exists();
+        // return (boolean) $this->followers()->where('following_id', $user_id)->exists();
+        return (boolean) $this->followers()->where('follow', $user_id)->exists();
     }
 
-//->first(['id'])
+    // １ページあたりの表示数
+    public function getAllUsers(Int $user_id)
+    {
+        return $this->follows()->where('follower', $user_id)->paginate(10);
+    }
 }

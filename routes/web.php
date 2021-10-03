@@ -48,10 +48,18 @@ Route::get('/logout', [
 ]);
 
 // フォロー数、フォロワー数
-Route::group(['middleware' => 'auth'], function(){
-    Route::get('/show', 'FollowsController@show');
-});
+// Route::group(['middleware' => 'auth'], function(){
+//     Route::get('/show', 'FollowsController@show');
+// });
+Route::get('/top', 'FollowsController@show');
 
+// フォローリスト一覧
+Route::get('follows.followList', 'FollowsController@followList');
+// フォロワーリスト一覧
+Route::get('follows.followerList', 'FollowsController@followerList');
+
+// 検索ページ
+Route::get('users.search', 'UsersCOntroller@search');
 
 
 

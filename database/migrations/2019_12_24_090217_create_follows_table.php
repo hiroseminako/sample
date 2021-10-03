@@ -19,10 +19,10 @@ class CreateFollowsTable extends Migration
             $table->integer('follower');
             $table->timestamp('created_at')->useCurrent();
 
-            $table->index('following_id');
-            $table->index('followed_id');
+            // $table->index('following_id');
+            // $table->index('followed_id');
 
-            $table->unique(['following_id', 'followed_id']);
+            // $table->unique(['following_id', 'followed_id']);
         });
     }
 
