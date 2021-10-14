@@ -1,6 +1,11 @@
 @extends('layouts.login')
 
 @section('content')
-<h2>機能を実装していきましょう。</h2>
+{!! Form::open(['url' => '/login']) !!}
+
+{{ Form::text('comment','何をつぶやこうか・・・?',['class' => 'comment']) }}
+
+
+{!! Form::close() !!}
 
 @endsection

@@ -29,12 +29,12 @@ class User extends Authenticatable
 
     // フォロワーの取得
     public function followers(){
-        return $this->belognsToMany(self::class, 'follows', 'follower', 'follow');
+        return $this->belongsToMany(self::class, 'follows', 'follower', 'follow');
     }
 
     // フォローしているユーザーの取得
     public function follows(){
-        return $this->belognsToMany(self::class, 'follows', 'follow', 'follower');
+        return $this->belongsToMany(self::class, 'follows', 'follow', 'follower');
     }
 
     //フォローする
@@ -52,20 +52,18 @@ class User extends Authenticatable
     // フォローしているか
     public function isFollowing(Int $user_id)
     {
-        // return (boolean) $this->follows()->where('followed_id', $user_id)->exists();
         return (boolean) $this->follows()->where('follower', $user_id)->exists();
     }
 
     // フォローされているか
     public function isFollowed(Int $user_id)
     {
-        // return (boolean) $this->followers()->where('following_id', $user_id)->exists();
         return (boolean) $this->followers()->where('follow', $user_id)->exists();
     }
 
     // １ページあたりの表示数
-    public function getAllUsers(Int $user_id)
-    {
-        return $this->follows()->where('follower', $user_id)->paginate(10);
-    }
+    // public function getAllUsers(Int $user_id)
+    // {
+    //     return $this->follows()->where('follower', $user_id)->paginate(10);
+    // }
 }

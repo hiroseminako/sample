@@ -24,6 +24,7 @@ header p{
     width: 300px;
     text-align: center;
 }
+/* style.cssのところにも記述あるのでどうするか検討 */
 #container{
     width: 300px;
     margin: 0 auto;

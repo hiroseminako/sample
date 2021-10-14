@@ -32,7 +32,8 @@ Route::post('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
 //ログイン中のページ
-Route::get('/top','PostsController@index');
+// Route::get('/top','PostsController@index');
+Route::get('/index','PostsController@index');
 
 Route::get('/profile','UsersController@profile');
 
@@ -51,7 +52,8 @@ Route::get('/logout', [
 // Route::group(['middleware' => 'auth'], function(){
 //     Route::get('/show', 'FollowsController@show');
 // });
-Route::get('/top', 'FollowsController@show');
+// Route::get('/top', 'FollowsController@show');
+Route::get('/index', 'FollowsController@show');
 
 // フォローリスト一覧
 Route::get('follows.followList', 'FollowsController@followList');
@@ -59,7 +61,7 @@ Route::get('follows.followList', 'FollowsController@followList');
 Route::get('follows.followerList', 'FollowsController@followerList');
 
 // 検索ページ
-Route::get('users.search', 'UsersCOntroller@search');
+Route::get('users.search', 'UsersController@search');
 
 
 

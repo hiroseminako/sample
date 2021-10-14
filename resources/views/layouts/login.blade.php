@@ -22,12 +22,12 @@
 <body>
     <header>
         <div id = "head">
-            <h1 class="logo"><a href="/top"><img src="images/main_logo.png"></a></h1>
+            <h1 class="logo"><a href="/index"><img src="images/main_logo.png"></a></h1>
             <div class="menu">
                 <input id="menu_bar" type="checkbox">
                 <label class="menu_label" for="menu_bar"><p>{{ Auth::user() -> username }}さん</p><span></span><img src="images/dawn.png"></label>
                 <ul id="links">
-                    <li><a href="/top">ホーム</a></li>
+                    <li><a href="/index">ホーム</a></li>
                     <li><a href="/profile">プロフィール</a></li>
                     <li><a href="{{ route('/logout') }}">ログアウト</a></li>
                 </ul>
