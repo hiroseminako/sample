@@ -50,26 +50,9 @@ class LoginController extends Controller
             //↓ログイン条件は公開時には消すこと
             // Auth::attempt()→認証処理をする。メールアドレスやパスワードをkey, valueの形で渡す
             if(Auth::attempt($data)){
-                // return redirect('/top');
                 return redirect('/index');
-                // return redirect('posts.index');
             }
         }
         return view("auth.login");
     }
-
-//    public function loginName($id)
-//     {
-//         $name = DB::table('users')
-//         ->where('id', $id)
-//         ->first();
-//         return view('login')->with('name',$name);
-//     }
-
-    // protected function redirectTo() {
-    //     $username = Auth::username();
-    //     Session::put([‘username’ => $username->username]);
-
-    //     return ‘/home’;
-    // }
 }

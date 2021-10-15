@@ -63,6 +63,11 @@ Route::get('follows.followerList', 'FollowsController@followerList');
 // 検索ページ
 Route::get('users.search', 'UsersController@search');
 
+// つぶやき表示
+Route::get('/index','PostsController@timeLine');
+Route::post('/index','PostsController@create');
+
+
 
 
 
