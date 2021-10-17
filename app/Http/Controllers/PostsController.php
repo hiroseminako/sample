@@ -18,7 +18,7 @@ class PostsController extends Controller
     // postsテーブルにつぶやきを登録
     public function create(Request $request)
     {
-        $user_id = Auth::id()->id;
+        $user_id = Auth::id();
         $tweet = $request->tweet;
         \DB::table('posts')->insert([
             'user_id' => $user_id,
@@ -26,7 +26,7 @@ class PostsController extends Controller
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        return redirect('posts.index');
+        return redirect('/index');
     }
 
     // つぶやきをブラウザに表示

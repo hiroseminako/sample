@@ -13,10 +13,9 @@
 
 @foreach($comments as $comment)
 <tr>
-  <td>{{ $comment->users.username }}</td>
-  <td>{{ $comment->posts.posts }}</td>
-  <td>{{ $comment->posts.created_at }}</td>
-  <!-- <td><img src='{{ $post->images }}'></td> -->
+  <td>{{ $comment->username }}</td>
+  <td>{{ $comment->posts }}</td>
+  <td>{{ $comment->created_at }}</td>
 </tr>
 @endforeach
 
