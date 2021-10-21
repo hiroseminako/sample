@@ -20,4 +20,9 @@ class Follow extends Model
     {
         return $this->where('follower', '<>', $user_id)->count();
     }
+
+    // フォロー中ユーザー一覧
+    public function follows() {
+        return $this->hasMany('App\Follow');
+    }
 }

@@ -4,7 +4,7 @@
 
 {!! Form::open(['url' => '/index']) !!}
 
-{{ Form::text('tweet','何をつぶやこうか・・・?',['class' => 'tweet']) }}
+{{ Form::text('tweet', null, ['class' => 'tweet', 'placeholder' => '何をつぶやこうか・・・?']) }}
 {{ Form::submit('') }}
 @if($errors->first('tweet'))
 {{ $errors->first('tweet') }}
@@ -13,9 +13,10 @@
 
 @foreach($comments as $comment)
 <tr>
-  <td>{{ $comment->username }}</td>
+  <td>{{ $comment->username }}</td><br>
   <td>{{ $comment->posts }}</td>
-  <td>{{ $comment->created_at }}</td>
+  <td>{{ $comment->created_at }}</td><br>
+  <td><img src="images/{{ $comment->images }}"></td><br>
 </tr>
 @endforeach
 
