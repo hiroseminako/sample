@@ -61,8 +61,13 @@ class UsersController extends Controller
             $query = User::query();
             $query->where('username', 'like', '%'.$search.'%');
             $users = $query->get();
-            $follows = Follow::all();
-            return view('users.search')->with(['users' => $users, 'follows' => $follows, 'search' => $search]);
+            // $userLists = \DB::table('users')
+            // ->join('follows', 'users.id', '=', 'follows.id')
+            // ->select('users.username', 'users.images', 'follows.follow')
+            // ->get();
+            // return view('users.search')->with(['users' => $users, 'follows' => $follows, 'search' => $search]);
+            return view('users.search')->with(['users' => $users, 'search' => $search]);
+            // return view('users.search')->with(['search' => $search, 'userLists' => $userLists]);
         }else{
             // ユーザー一覧
             $users = User::all();
@@ -73,6 +78,11 @@ class UsersController extends Controller
             'follows' => $follows
         ];
             return view('users.search', $param);
+            // $userLists = \DB::table('users')
+            // ->join('follows', 'users.id', '=', 'follows.id')
+            // ->select('users.username', 'users.images', 'follows.follow')
+            // ->get();
+            // return view('users.search', ['userLists' => $userLists]);
         }
     }
 
