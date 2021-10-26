@@ -61,69 +61,22 @@ class UsersController extends Controller
             $query = User::query();
             $query->where('username', 'like', '%'.$search.'%');
             $users = $query->get();
-            // $userLists = \DB::table('users')
-            // ->join('follows', 'users.id', '=', 'follows.id')
-            // ->select('users.username', 'users.images', 'follows.follow')
-            // ->get();
-            // return view('users.search')->with(['users' => $users, 'follows' => $follows, 'search' => $search]);
-            return view('users.search')->with(['users' => $users, 'search' => $search]);
-            // return view('users.search')->with(['search' => $search, 'userLists' => $userLists]);
+            $follows = \DB::table('follows')
+            ->where('follow', Auth::id())
+            ->get()
+            ->toArray();
+            return view('users.search')->with(['users' => $users, 'follows' => $follows, 'search' => $search]);
         }else{
             // ユーザー一覧
             $users = User::all();
-            // フォローしている人一覧（フォローしている：フォローをはずす、フォローしていない：フォローする、と表示させる）
-            $follows = Follow::all();
-            $param = [
-            'users' => $users,
-            'follows' => $follows
-        ];
-            return view('users.search', $param);
-            // $userLists = \DB::table('users')
-            // ->join('follows', 'users.id', '=', 'follows.id')
-            // ->select('users.username', 'users.images', 'follows.follow')
-            // ->get();
-            // return view('users.search', ['userLists' => $userLists]);
+            // フォローしている人一覧
+            $follows = \DB::table('follows')
+            ->where('follow', Auth::id())
+            ->get()
+            ->toArray();
+            return view('users.search')->with(['users' => $users, 'follows' => $follows]);
         }
     }
-
-    // // 検索画面の表示
-    // public function search(Request $request){
-    //     // ユーザー一覧
-    //     $users = User::all();
-    //     // $users = User::paginate(20);
-    //     // フォローしている人一覧
-    //     $follows = Follow::all();
-    //     $param = [
-    //         'users' => $users,
-    //         'follows' => $follows
-    //     ];
-    //     return view('users.search', $param);
-    // }
-
-    // // 検索結果
-    // public function searchResult(Request $request){
-    //     $search = $request->input('search');
-    //     $query = User::query();
-    //     if(!empty($search))
-    //     {
-    //         $query->where('username','like','%'.$search.'%');
-    //     }
-    //     $users = $query->get();
-    //     $follows = $query->get();
-    //     return view('users.search')->with(['users' => $users, 'follows' => $follows, 'search' => $search]);
-    // }
-
-    // 参考
-//     if(isset($search)){
-//   $sql = "select * from users where username like :search order by id desc";
-//   $stmt = $pdo->prepare($sql);
-//   $stmt->bindValue(':search', "%" .htmlspecialchars($search). "%", PDO::PARAM_INT);
-//   }else{
-//     $sql = "select * from users order by id asc";
-//     $stmt = $pdo-> prepare($sql);
-//   }
-//   $stmt->execute();
-//   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // ログアウト
     public function logout()
