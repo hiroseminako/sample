@@ -13,12 +13,12 @@ class Follow extends Model
 
     public function getFollowCount($user_id)
     {
-        return $this->where('follow', '<>', $user_id)->count();
+        return $this->where('follow', '=', $user_id)->count();
     }
 
     public function getFollowerCount($user_id)
     {
-        return $this->where('follower', '<>', $user_id)->count();
+        return $this->where('follower', '=', $user_id)->count();
     }
 
     // フォロー中ユーザー一覧

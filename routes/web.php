@@ -49,10 +49,6 @@ Route::get('/logout', [
 ]);
 
 // フォロー数、フォロワー数
-// Route::group(['middleware' => 'auth'], function(){
-//     Route::get('/show', 'FollowsController@show');
-// });
-// Route::get('/top', 'FollowsController@show');
 Route::get('/index', 'FollowsController@show');
 
 // フォローリスト一覧
@@ -63,9 +59,10 @@ Route::get('follows.followerList', 'FollowsController@followerList');
 // 検索ページ
 Route::get('users.search', 'UsersController@search');
 Route::post('users.search', 'UsersController@search');
-
-// 検索結果
-// Route::get('users.search', 'UsersController@searchResult');
+// フォローする
+Route::get('users/{id}/follow', 'UsersController@follow');
+// フォローを外す
+Route::get('users/{id}/unfollow', 'UsersController@unfollow');
 
 // つぶやき表示
 Route::get('/index','PostsController@timeLine');

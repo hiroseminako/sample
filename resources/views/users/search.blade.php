@@ -13,19 +13,14 @@
 <tr>
   <td><img src="images/{{ $user->images }}"></td>
   <td>{{ $user->username }}</td>
-  @if(in_array($user->id, array_column($follows, 'follows')))
+  @if(in_array($user->id, array_column($follows, 'follower')))
     <td>
-      {!! Form::open(['action' => 'unfollow', 'method' => 'post']) !!}
-      {{ Form::submit('フォローをはずす') }}
-      {!! Form::close() !!}
-        <a href="">フォローをはずす</a>
+      <a href="users/{{ $user->id }}/unfollow">フォローをはずす</a>
     </td>
+    <br>
       @else
       <td>
-        {!! Form::open(['action' => 'follow', 'method' => 'post']) !!}
-        {{ Form::submit('フォローする') }}
-        {!! Form::close() !!}
-        <a href="">フォローする</a>
+        <a href="users/{{ $user->id }}/follow">フォローする</a>
       </td>
   <br>
   @endif

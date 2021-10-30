@@ -64,7 +64,7 @@ class User extends Authenticatable
     // １ページあたりの表示数
     public function getAllUsers(Int $user_id)
     {
-        return $this->follows()->where('follower', $user_id)->paginate(10);
+        return $this->follows()->where('follower', $user_id)->paginate(20);
     }
 
     // 検索一覧

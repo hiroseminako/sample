@@ -33,7 +33,8 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $follower = Auth::user();
-        $is_following = $follower->isFollowing($user);
+        $is_following = $follower->isFollowing($user->id);
+        // フォローしていなければフォローする
         if(!$is_following){
             $follower->follow($user->id);
         }
@@ -45,9 +46,10 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $follower = Auth::user();
-        $is_following = $follower->isFollowing($user);
+        $is_following = $follower->isFollowing($user->id);
+        // フォローしていればフォロー解除
         if($is_following){
-            $$follower->unfollow($user->id);
+            $follower->unfollow($user->id);
         }
         return back();
     }
@@ -59,7 +61,8 @@ class UsersController extends Controller
         if(isset($search))
         {
             $query = User::query();
-            $query->where('username', 'like', '%'.$search.'%');
+            $query->where('username', 'like', '%'.$search.'%')
+            ->where('id', '<>', Auth::id());
             $users = $query->get();
             $follows = \DB::table('follows')
             ->where('follow', Auth::id())
@@ -68,7 +71,8 @@ class UsersController extends Controller
             return view('users.search')->with(['users' => $users, 'follows' => $follows, 'search' => $search]);
         }else{
             // ユーザー一覧
-            $users = User::all();
+            $users = User::all()
+            ->where('id', '<>', Auth::id());
             // フォローしている人一覧
             $follows = \DB::table('follows')
             ->where('follow', Auth::id())

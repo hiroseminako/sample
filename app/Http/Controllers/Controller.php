@@ -21,9 +21,9 @@ class Controller extends BaseController
             //ログインユーザー名
             $username = Auth::user();
             //フォロワーのカウント
-            $follower_count = Follow::where('follow', '=', Auth::id())->count();
+            $follower_count = Follow::where('follower', '=', Auth::id())->count();
             //フォローのカウント
-            $follow_count = Follow::where('follower', '=', Auth::id())->count();
+            $follow_count = Follow::where('follow', '=', Auth::id())->count();
             View::share('username', $username['username']);
             View::share('follower_count', $follower_count);
             View::share('follow_count', $follow_count);

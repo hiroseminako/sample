@@ -29,9 +29,12 @@ class FollowsController extends Controller
         ]);
     }
 
+    // フォロー一覧
     public function followList(){
         return view('follows.followList');
     }
+
+    // フォロワー一覧
     public function followerList(){
         return view('follows.followerList');
     }
