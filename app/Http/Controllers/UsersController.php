@@ -10,12 +10,20 @@ use App\Models\Post;
 
 class UsersController extends Controller
 {
-    //
-    public function profile(){
+    // プロフィール画面
+    public function profile()
+    {
         $user = \DB::table('users')
         ->where('id', Auth::id())
         ->first();
         return view('users.profile', ['user' => $user]);
+    }
+
+    // プロフィール更新
+    public function profileUpdate(Request $request)
+    {
+        // もし更新ボタンが押されたらデータベースに値を入れる
+        return back();
     }
 
     // ログイン画面
