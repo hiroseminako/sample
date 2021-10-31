@@ -15,10 +15,7 @@ class UsersController extends Controller
         $user = \DB::table('users')
         ->where('id', Auth::id())
         ->first();
-
-        return view('users.profile',[
-            'user'=>$user
-        ]);
+        return view('users.profile', ['user' => $user]);
     }
 
     // ログイン画面

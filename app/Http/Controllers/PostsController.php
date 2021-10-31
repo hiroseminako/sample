@@ -37,7 +37,7 @@ class PostsController extends Controller
         ->select('users.username', 'posts.posts', 'users.images', 'posts.created_at')
         ->orderBy('posts.created_at', 'desc')
         ->get();
-        return view('posts.index', ['comments'=>$comments]);
+        return view('posts.index', ['comments' => $comments]);
     }
 
 }

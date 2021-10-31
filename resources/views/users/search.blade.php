@@ -22,7 +22,7 @@
       <td>
         <a href="users/{{ $user->id }}/follow">フォローする</a>
       </td>
-  <br>
+    <br>
   @endif
 </tr>
 @endforeach

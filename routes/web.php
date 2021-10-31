@@ -32,29 +32,22 @@ Route::post('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
 //ログイン中のページ
-// Route::get('/top','PostsController@index');
 Route::get('/index','PostsController@index');
-
+// プロフィール編集画面
 Route::get('/profile','UsersController@profile');
-
 Route::get('/search','UsersController@index');
-
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
-
-// ログアウト
-Route::get('/logout', [
-    'uses' => 'UsersController@logout',
-    'as' => '/logout'
-]);
 
 // フォロー数、フォロワー数
 Route::get('/index', 'FollowsController@show');
 
 // フォローリスト一覧
 Route::get('follows.followList', 'FollowsController@followList');
+Route::get('profile/{id}', 'FollowsController@followList');
 // フォロワーリスト一覧
 Route::get('follows.followerList', 'FollowsController@followerList');
+Route::get('profile/{id}', 'FollowsController@followerList');
 
 // 検索ページ
 Route::get('users.search', 'UsersController@search');
@@ -68,7 +61,11 @@ Route::get('users/{id}/unfollow', 'UsersController@unfollow');
 Route::get('/index','PostsController@timeLine');
 Route::post('/index','PostsController@create');
 
-
+// ログアウト
+Route::get('/logout', [
+    'uses' => 'UsersController@logout',
+    'as' => '/logout'
+]);
 
 
 

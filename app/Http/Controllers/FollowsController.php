@@ -31,11 +31,37 @@ class FollowsController extends Controller
 
     // フォロー一覧
     public function followList(){
-        return view('follows.followList');
+        $follows = \DB::table('follows')
+        ->join('users', 'follows.follower', '=', 'users.id')
+        ->where('follows.follow', '=', Auth::id())
+        ->select('users.images', 'follows.follower')
+        ->get();
+        $followTweets = \DB::table('users')
+        ->join('follows', 'follows.follower', '=', 'users.id')
+        ->join('posts', 'posts.user_id', '=', 'users.id')
+        ->where('follows.follow', '=', Auth::id())
+        ->select('users.username', 'users.images', 'posts.posts', 'posts.created_at', 'posts.updated_at', 'follows.follower')
+        ->orderBy('posts.created_at', 'desc')
+        ->get();
+        return view('follows.followList')->with(['follows' => $follows, 'followTweets' => $followTweets]);
+        return view('/profile')->with(['follows' => $follows, 'followTweets' => $followTweets]);
     }
 
     // フォロワー一覧
     public function followerList(){
-        return view('follows.followerList');
+        $followers = \DB::table('follows')
+        ->join('users', 'follows.follow', '=', 'users.id')
+        ->where('follows.follower', '=', Auth::id())
+        ->select('users.images', 'follows.follow')
+        ->get();
+        $followerTweets = \DB::table('users')
+        ->join('follows', 'follows.follow', '=', 'users.id')
+        ->join('posts', 'posts.user_id', '=', 'users.id')
+        ->where('follows.follower', '=', Auth::id())
+        ->select('users.username', 'users.images', 'posts.posts', 'posts.created_at', 'posts.updated_at', 'follows.follow')
+        ->orderBy('posts.created_at', 'desc')
+        ->get();
+        return view('follows.followerList')->with(['followers' => $followers, 'followerTweets' => $followerTweets]);
+        return view('follows.followerList')->with(['followers' => $followers, 'followerTweets' => $followerTweets]);
     }
 }

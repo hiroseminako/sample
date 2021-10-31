@@ -28,7 +28,7 @@
                 <label class="menu_label" for="menu_bar"><p>{{ Auth::user() -> username }}さん</p><span></span><img src="images/dawn.png"></label>
                 <ul id="links">
                     <li><a href="/index">ホーム</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
+                    <li><a href="/profile">プロフィール編集</a></li>
                     <li><a href="{{ route('/logout') }}">ログアウト</a></li>
                 </ul>
             </div>
