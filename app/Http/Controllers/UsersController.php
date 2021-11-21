@@ -19,12 +19,80 @@ class UsersController extends Controller
         return view('users.profile', ['user' => $user]);
     }
 
-    // プロフィール更新
-    public function profileUpdate(Request $request)
+    // プロフィール内容の条件：バリデーション
+    public function validator(array $data)
     {
-        // もし更新ボタンが押されたらデータベースに値を入れる
-        return back();
+        return Validator::make($data, [
+            'username' => 'min:2|max:12',
+            'mail' => 'email|min:4|max:100',
+            'new_password' => 'min:8|confirmed',
+            'bio' => 'max:200'
+            // 'image' => ファイルサイズの指定とか？
+        ],[
+            'username.min' => 'ユーザー名は４文字以上で入力してください。',
+            'username.max' => 'ユーザー名は12文字以下で入力してください。',
+            'mail.email' => 'アドレス形式で入力してください。',
+            'mail.min' => 'メールアドレスは４文字以上で入力してください。',
+            'new_password.min' => 'パスワードは8文字以上で入力してください。',
+            'mail.max' => 'メールアドレスは100文字以下で入力してください。',
+            'bio.max' => '自己紹介文は200文字以下で入力して下さい。'
+        ]);
     }
+
+    // プロフィール更新
+    public function update(Request $request)
+    {
+        $username = $request->input('username');
+        $mail = $request->input('mail');
+        $newPassword = $request->input('new_password');
+        $bio = $request->input('bio');
+        $image = $request->files('image');
+
+        if(isset($newPassword))
+        {
+            $data = $request->input();
+            $validator = $this->validator($data);
+            if($validator->fails())
+            {
+                return redirect('/profile')
+                ->withErrors($validator)
+                ->withInput();
+            }elseif(isset($newPassword))
+            {
+
+            }
+        }
+    }
+
+    // protected function create(array $data)
+    // {
+    //     return User::create([
+    //         'username' => $data['username'],
+    //         'mail' => $data['mail'],
+    //         'password' => bcrypt($data['password']),
+    //         'password-confirm' => bcrypt($data['password-confirm'])
+    //     ]);
+    // }
+
+    // // 登録されたユーザー情報、エラーメッセージを取得し、addedに送る
+    // public function register(Request $request){
+    //     if($request->isMethod('post')){
+    //         // テーブルデータの取得
+    //         $data = $request->input();
+    //         //エラーメッセージの取得（バリデーションの適用）
+    //         $val = $this->validator($data);
+    //         // エラーの時の処理
+    //         if($val->fails()){
+    //             // エラーメッセージの送信(セッション)
+    //             return redirect('register')->withErrors($val)->withInput();
+    //         }
+    //         //データの取得
+    //         $this->create($data);
+    //         //データの送信
+    //         return redirect('added')->with('data', $data['username']);
+    //     }
+    //     return view('auth.register');
+    // }
 
     // ログイン画面
     public function login()

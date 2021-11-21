@@ -13,17 +13,17 @@
 <br>
 <tr>
   <td>MailAddress</td>
-  <td>{{ Form::text('mailaddress', $user->mail, ['class' => 'profile_mail']) }}</td>
+  <td>{{ Form::text('mail', $user->mail, ['class' => 'profile_mail']) }}</td>
 </tr>
 <br>
 <tr>
   <td>Password</td>
-  <td>{{ Form::text('pass1', $user->password, ['class' => 'profile_pass1', 'disabled']) }}</td>
+  <td>{{ Form::text('password', $user->password, ['class' => 'profile_pass', 'disabled']) }}</td>
 </tr>
 <br>
 <tr>
   <td>new Password</td>
-  <td>{{ Form::text('pass2', $user->password, ['class' => 'profile_pass2']) }}</td>
+  <td>{{ Form::text('new_password', $user->password, ['class' => 'profile_newpass']) }}</td>
 </tr>
 <br>
 <tr>
@@ -33,11 +33,11 @@
 <br>
 <tr>
   <td>Icon Image</td>
-  <td>{{ Form::text('icon', null, ['class' => 'profile_icon']) }}</td>
+  <td>{{ Form::file('image', ['class' => 'profile_icon']) }}</td>
 </tr>
 <br>
 {{ Form::hidden('id', $user->id) }}
-{{ Form::submit('更新', ['class' => 'update_button']) }}
+{{ Form::submit('更新', ['name' => 'update', 'class' => 'update_button']) }}
 
 {!! Form::close() !!}
 
