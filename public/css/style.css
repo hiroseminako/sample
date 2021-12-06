@@ -14,12 +14,62 @@ header{
     color: #fff;
 }
 
-/* 共通部分 */
+/* 共通部分ここから */
 #head,
 #row{
     width: 90%;
     margin: 0 auto;
 }
+
+/* main content */
+#row{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#container{
+    flex: 0 0 80%;
+    color: #696969;
+}
+
+#side-bar{
+    flex: 0 0 19%;
+    border-left: 1px solid #6C6C6C;
+    color: #696969;
+}
+
+.profile_icon{
+    border-radius: 55px;
+}
+
+/* 右側カラム */
+#confirm p:first-child{
+    margin-top: 15px;
+}
+
+#confirm p{
+    margin-bottom: 15px;
+}
+
+.btn{
+    text-align: center;
+}
+
+#confirm .btn{
+    text-align: right;
+}
+
+.btn a{
+    display: inline-block;
+    text-align: center;
+    padding: 20px 0;
+    width: 150px;
+    background-color: #3C4767;
+    color: white;
+    border-radius: 10px;
+}
+
+/* 共通部分ここまで */
 
 /* header部部分のflexbox */
 #head{
@@ -135,17 +185,51 @@ header{
   margin: auto;
 }
 
+/* ホーム画面ここから */
 
-/* main content */
-#row{
-    display: flex;
-    flex-flow: row wrap;
+/* 新規ツイート */
+.new_tweet{
+    margin-bottom: 30px;
 }
-#container{
-    flex: 0 0 80%;
-    color: black;
+
+.tweet{
+    width: 90%;
+    height: 80px;
+    vertical-align: top;
 }
-#side-bar{
-    flex: 0 0 19%;
-    border-left: 1px solid #6C6C6C;
+
+.tweet_submit_button{
+    vertical-align: bottom;
 }
+
+/* タイムライン */
+.all_tweets{
+    margin-bottom: 30px;
+}
+
+/* ツイート更新 */
+.tweet_update_wrap{
+    text-align: right;
+    margin-right: 30px;
+}
+
+.edit_button{
+    margin-right: 20px;
+}
+
+.trash_button{
+    position: relative;
+}
+
+.trash_button .active{
+    position: absolute;
+    left: 0;
+    top: -40px;
+    opacity: 0;
+    transition: .2s;
+}
+
+.trash_button:hover .active{
+    opacity: 1;
+}
+/* ホーム画面ここまで */

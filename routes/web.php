@@ -33,11 +33,12 @@ Route::post('/added', 'Auth\RegisterController@added');
 
 //ログイン中のページ
 Route::get('/index','PostsController@index');
+
 // プロフィール編集画面
-Route::get('/profile','UsersController@profile');
+Route::get('/profile', 'UsersController@profile');
+Route::post('/profile', 'UsersController@update');
+
 Route::get('/search','UsersController@index');
-Route::get('/profile/{id}','UsersController@update');
-Route::post('/profile/{id}','UsersController@update');
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
 
@@ -62,6 +63,12 @@ Route::get('users/{id}/unfollow', 'UsersController@unfollow');
 // つぶやき表示
 Route::get('/index','PostsController@timeLine');
 Route::post('/index','PostsController@create');
+
+// つぶやき更新
+Route::post('/index/{id}/edit','PostsController@update');
+
+// つぶやき削除
+Route::get('/index/{id}/delete','PostsController@delete');
 
 // ログアウト
 Route::get('/logout', [

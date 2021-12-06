@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\User;
 use App\Follow;
 use App\Models\Post;
@@ -25,15 +26,13 @@ class UsersController extends Controller
         return Validator::make($data, [
             'username' => 'min:2|max:12',
             'mail' => 'email|min:4|max:100',
-            'new_password' => 'min:8|confirmed',
             'bio' => 'max:200'
-            // 'image' => ファイルサイズの指定とか？
+            // 'images' => ファイルサイズの指定とか
         ],[
-            'username.min' => 'ユーザー名は４文字以上で入力してください。',
+            'username.min' => 'ユーザー名は2文字以上で入力してください。',
             'username.max' => 'ユーザー名は12文字以下で入力してください。',
             'mail.email' => 'アドレス形式で入力してください。',
             'mail.min' => 'メールアドレスは４文字以上で入力してください。',
-            'new_password.min' => 'パスワードは8文字以上で入力してください。',
             'mail.max' => 'メールアドレスは100文字以下で入力してください。',
             'bio.max' => '自己紹介文は200文字以下で入力して下さい。'
         ]);
@@ -44,55 +43,87 @@ class UsersController extends Controller
     {
         $username = $request->input('username');
         $mail = $request->input('mail');
-        $newPassword = $request->input('new_password');
+        $new_password = $request->input('new_password');
         $bio = $request->input('bio');
-        $image = $request->files('image');
+        $images = $request->file('images');
 
-        if(isset($newPassword))
+        $data = $request->input();
+        $validator = $this->validator($data);
+
+        // バリデーション
+        if($validator->fails())
         {
-            $data = $request->input();
-            $validator = $this->validator($data);
-            if($validator->fails())
-            {
-                return redirect('/profile')
-                ->withErrors($validator)
-                ->withInput();
-            }elseif(isset($newPassword))
-            {
+            return redirect('/profile')
+            ->withErrors($validator)
+            ->withInput();
+        }
 
+        // NewパスワードとProfile画像のアップデートとそれ以外に分ける
+        // NewパスワードとProfile画像のアップデート
+        else{
+            if(isset($new_password) && isset($images))
+            {
+            $filename = $images->getClientOriginalName();
+            $images->storeAs('images', $filename, 'icon');
+            \DB::table('users')
+            ->where('id', Auth::id())
+            ->update([
+                'username' => $username,
+                'mail' => $mail,
+                'password' => bcrypt($new_password),
+                'bio' => $bio,
+                'images' => $filename,
+                'updated_at' => now()
+            ]);
             }
+
+            // Profile画像のみアップデート
+            elseif(isset($new_password) && empty($images))
+            {
+                \DB::table('users')
+                ->where('id', Auth::id())
+                ->update([
+                    'username' => $username,
+                    'mail' => $mail,
+                    'password' => bcrypt($new_password),
+                    'bio' => $bio,
+                    'updated_at' => now()
+                ]);
+            }
+
+            // Newパスワードのみアップデート
+            elseif(isset($images) && empty($new_password))
+            {
+                $filename = $images->getClientOriginalName();
+                // icon: config>filesystem.phpで管理する
+                $images->storeAs('images', $filename, 'icon');
+                \DB::table('users')
+                ->where('id', Auth::id())
+                ->update([
+                    'username' => $username,
+                    'mail' => $mail,
+                    'bio' => $bio,
+                    'images' => $filename,
+                    'updated_at' => now()
+                ]);
+            }
+
+            // 上記以外（ユーザー名、メールアドレス、自己紹介文）
+            else{
+                \DB::table('users')
+                ->where('id', Auth::id())
+                ->update([
+                    'username' => $username,
+                    'mail' => $mail,
+                    'bio' => $bio,
+                    'updated_at' => now()
+                ]);
+            }
+
+            return redirect('/profile');
+
         }
     }
-
-    // protected function create(array $data)
-    // {
-    //     return User::create([
-    //         'username' => $data['username'],
-    //         'mail' => $data['mail'],
-    //         'password' => bcrypt($data['password']),
-    //         'password-confirm' => bcrypt($data['password-confirm'])
-    //     ]);
-    // }
-
-    // // 登録されたユーザー情報、エラーメッセージを取得し、addedに送る
-    // public function register(Request $request){
-    //     if($request->isMethod('post')){
-    //         // テーブルデータの取得
-    //         $data = $request->input();
-    //         //エラーメッセージの取得（バリデーションの適用）
-    //         $val = $this->validator($data);
-    //         // エラーの時の処理
-    //         if($val->fails()){
-    //             // エラーメッセージの送信(セッション)
-    //             return redirect('register')->withErrors($val)->withInput();
-    //         }
-    //         //データの取得
-    //         $this->create($data);
-    //         //データの送信
-    //         return redirect('added')->with('data', $data['username']);
-    //     }
-    //     return view('auth.register');
-    // }
 
     // ログイン画面
     public function login()

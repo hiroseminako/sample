@@ -18,6 +18,8 @@
     <!--iphoneのアプリアイコン指定-->
     <link rel="apple-touch-icon-precomposed" href="画像のURL" />
     <!--OGPタグ/twitterカード-->
+    <!-- jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -25,7 +27,7 @@
             <h1 class="logo"><a href="/index"><img src="images/main_logo.png"></a></h1>
             <div class="menu">
                 <input id="menu_bar" type="checkbox">
-                <label class="menu_label" for="menu_bar"><p>{{ Auth::user() -> username }}さん</p><span></span><img src="images/dawn.png"></label>
+                <label class="menu_label" for="menu_bar"><p>{{ Auth::user() -> username }}さん</p><span></span><img src="images/{{ Auth::user()->images }}" height="55px" width="55px" class="profile_icon"></label>
                 <ul id="links">
                     <li><a href="/index">ホーム</a></li>
                     <li><a href="/profile">プロフィール編集</a></li>

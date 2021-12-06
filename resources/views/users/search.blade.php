@@ -11,7 +11,7 @@
 
 @foreach($users as $user)
 <tr>
-  <td><img src="images/{{ $user->images }}"></td>
+  <td><img src="images/{{ $user->images }}" height="55px" width="55px" class="profile_icon"></td>
   <td>{{ $user->username }}</td>
   @if(in_array($user->id, array_column($follows, 'follower')))
     <td>
