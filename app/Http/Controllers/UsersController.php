@@ -186,6 +186,29 @@ class UsersController extends Controller
         }
     }
 
+    // 個別ユーザーページ
+        public function userPage($id)
+    {
+        $user = \DB::table('users')
+        ->where('id', $id)
+        ->select('id', 'images', 'username', 'bio')
+        ->first();
+
+        $follows = \DB::table('follows')
+        ->where('follow', Auth::id())
+        ->get()
+        ->toArray();
+
+        $userTweets = \DB::table('posts')
+        ->join('users', 'users.id', '=', 'posts.user_id')
+        ->where('user_id', $id)
+        ->select('posts.posts', 'posts.created_at', 'users.username', 'users.images', 'users.id')
+        ->orderBy('posts.created_at', 'desc')
+        ->get();
+
+        return view('users.userpage')->with(['user' => $user, 'follows' => $follows, 'userTweets' => $userTweets]);
+    }
+
     // ログアウト
     public function logout()
     {

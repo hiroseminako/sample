@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="ページの内容を表す文章" />
     <title></title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -24,10 +24,10 @@
 <body>
     <header>
         <div id = "head">
-            <h1 class="logo"><a href="/index"><img src="images/main_logo.png"></a></h1>
+            <h1 class="logo"><a href="/index"><img src="{{ asset('images/main_logo.png') }}"></a></h1>
             <div class="menu">
                 <input id="menu_bar" type="checkbox">
-                <label class="menu_label" for="menu_bar"><p>{{ Auth::user() -> username }}さん</p><span></span><img src="images/{{ Auth::user()->images }}" height="55px" width="55px" class="profile_icon"></label>
+                <label class="menu_label" for="menu_bar"><p>{{ Auth::user() -> username }}さん</p><span></span><img src="{{ asset('images/'. Auth::user()->images) }}" height="55px" width="55px" class="profile_icon"></label>
                 <ul id="links">
                     <li><a href="/index">ホーム</a></li>
                     <li><a href="/profile">プロフィール編集</a></li>
@@ -42,19 +42,19 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>{{ Auth::user() -> username }}さんの</p>
-                <div>
-                <p>フォロー数</p>
-                <p>{{ $follow_count }}名</p>
+                <p class="side_username">{{ Auth::user() -> username }}さんの</p>
+                <div class="side_follow">
+                    <p>フォロー数</p>
+                    <p>{{ $follow_count }}名</p>
                 </div>
                 <p class="btn"><a href="/follows.followList">フォローリスト</a></p>
-                <div>
-                <p>フォロワー数</p>
-                <p>{{ $follower_count }}名</p>
+                <div class="side_follower">
+                    <p>フォロワー数</p>
+                    <p>{{ $follower_count }}名</p>
                 </div>
                 <p class="btn"><a href="/follows.followerList">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="/users.search">ユーザー検索</a></p>
+            <p class="btn side_search"><a href="/users.search">ユーザー検索</a></p>
         </div>
     </div>
     <footer>

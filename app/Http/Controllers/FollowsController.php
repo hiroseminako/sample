@@ -30,7 +30,8 @@ class FollowsController extends Controller
     }
 
     // フォロー一覧
-    public function followList(){
+    public function followList()
+    {
         $follows = \DB::table('follows')
         ->join('users', 'follows.follower', '=', 'users.id')
         ->where('follows.follow', '=', Auth::id())
@@ -48,7 +49,8 @@ class FollowsController extends Controller
     }
 
     // フォロワー一覧
-    public function followerList(){
+    public function followerList()
+    {
         $followers = \DB::table('follows')
         ->join('users', 'follows.follow', '=', 'users.id')
         ->where('follows.follower', '=', Auth::id())

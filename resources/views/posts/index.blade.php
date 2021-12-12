@@ -3,22 +3,24 @@
 @section('content')
 
 <div class="new_tweet">
-{!! Form::open(['url' => '/index']) !!}
-{{ Form::text('tweet', null, ['class' => 'tweet', 'placeholder' => '何をつぶやこうか・・・?']) }}
-{{ Form::image('images/post.png', 'image', ['class' => 'tweet_submit_button']) }}
-@if($errors->first('tweet'))
-{{ $errors->first('tweet') }}
-@endif
-{!! Form::close() !!}
+  {!! Form::open(['url' => '/index']) !!}
+  <tr>
+    <td><img src="images//{{ $user->images }}" class="user_image profile_icon"  height="55px" width="55px"></td>
+    <td>{{ Form::text('tweet', null, ['class' => 'tweet', 'placeholder' => '何をつぶやこうか・・・?']) }}</td>
+    <td>{{ Form::image('images/post.png', 'image', ['class' => 'tweet_submit_button']) }}</td>
+    @if($errors->first('tweet'))
+    {{ $errors->first('tweet') }}
+    @endif
+    {!! Form::close() !!}
+  </tr>
 </div>
 
 @foreach($comments as $comment)
   <div class="all_tweets">
-    <tr>
-      <td>{{ $comment->username }}</td><br>
-      <td>{{ $comment->posts }}</td>
-      <td>{{ $comment->created_at }}</td><br>
-      <td><img src="images/{{ $comment->images }}" height="55px" width="55px" class="profile_icon"></td><br>
+      <p class="tweet_image"><img src="images/{{ $comment->images }}" height="55px" width="55px" class="profile_icon"></p>
+      <p class="tweet_username">{{ $comment->username }}</p>
+      <p class="tweet_date">{{ $comment->created_at }}</p>
+      <p class="tweet_post">{{ $comment->posts }}</p>
 
       @if( $comment->username === Auth::user()->username )
 
@@ -42,7 +44,6 @@
 
       @endif
 
-    </tr>
   </div>
 @endforeach
 

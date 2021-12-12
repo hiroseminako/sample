@@ -59,12 +59,13 @@ class PostsController extends Controller
     // つぶやきをブラウザに表示
     public function timeLine()
     {
+        $user = Auth::user();
         $comments = \DB::table('posts')
         ->join('users', 'posts.user_id', '=', 'users.id')
         ->select('users.username', 'posts.posts', 'users.images', 'posts.created_at', 'posts.id')
         ->orderBy('posts.created_at', 'desc')
         ->get();
-        return view('posts.index', ['comments' => $comments]);
+        return view('posts.index', ['user' => $user, 'comments' => $comments]);
     }
 
     // つぶやきの更新
@@ -88,7 +89,7 @@ class PostsController extends Controller
         ->where('id', $tweet_id)
         ->update([
             'posts' => $tweet_update,
-            'updated_at' => now()
+            'created_at' => now()
         ]);
         return redirect('/index');
         }

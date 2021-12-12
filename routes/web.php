@@ -47,10 +47,10 @@ Route::get('/index', 'FollowsController@show');
 
 // フォローリスト一覧
 Route::get('follows.followList', 'FollowsController@followList');
-Route::get('profile/{id}', 'FollowsController@followList');
 // フォロワーリスト一覧
 Route::get('follows.followerList', 'FollowsController@followerList');
-Route::get('profile/{id}', 'FollowsController@followerList');
+// 個別ユーザーページ
+Route::get('userpage/{id}', 'UsersController@userPage');
 
 // 検索ページ
 Route::get('users.search', 'UsersController@search');
