@@ -9,11 +9,20 @@
     </td>
   </tr>
 
+  <div class="profile_item">
+    <p>UserName</p>
+    <p>MailAddress</p>
+    <p>Password</p>
+    <p>new Password</p>
+    <p>Bio</p>
+    <p>Icon Image</p>
+  </div>
+
   <div class="profile_form">
     {!! Form::open(['url' => '/profile', 'files' => true]) !!}
 
     <tr class="profile_username">
-      <td>UserName</td>
+      <!-- <td>UserName</td> -->
       <td>{{ Form::text('username', $user->username, ['class' => 'profile_name']) }}</td>
       @if($errors->has('username'))
       {{ $errors->first('username') }}
@@ -21,7 +30,7 @@
     </tr>
     <br>
     <tr>
-      <td>MailAddress</td>
+      <!-- <td>MailAddress</td> -->
       <td>{{ Form::text('mail', $user->mail, ['class' => 'profile_mail']) }}</td>
       @if($errors->has('mail'))
       {{ $errors->first('mail') }}
@@ -29,12 +38,12 @@
     </tr>
     <br>
     <tr>
-      <td>Password</td>
-      <td>{{ Form::input('password', 'password', $user->password, ['class' => 'profile_pass', 'disabled']) }}</td>
+      <!-- <td>Password</td> -->
+      <td>{{ Form::input('password', 'password', 'pass1', ['class' => 'profile_pass', 'disabled']) }}</td>
     </tr>
     <br>
     <tr>
-      <td>new Password</td>
+      <!-- <td>new Password</td> -->
       <td>{{ Form::password('new_password', null, ['class' => 'profile_newpass']) }}</td>
       @if($errors->has('new_password'))
       {{ $errors->first('new_password') }}
@@ -42,7 +51,7 @@
     </tr>
     <br>
     <tr>
-      <td>Bio</td>
+      <!-- <td>Bio</td> -->
       <td>{{ Form::text('bio', null, ['class' => 'profile_bio']) }}</td>
       @if($errors->has('bio'))
       {{ $errors->first('bio')}}
@@ -50,7 +59,7 @@
     </tr>
     <br>
     <tr>
-      <td>Icon Image</td>
+      <!-- <td>Icon Image</td> -->
       <td>{{ Form::file('images', ['class' => 'profile_images']) }}</td>
       @if($errors->has('images'))
       {{ $errors->first('images')}}
