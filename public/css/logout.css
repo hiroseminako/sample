@@ -12,10 +12,13 @@ body{
     width: 100px;
     margin: 0 auto;
 } */
+
+/* ログインページここから */
+
 header h1{
     width: 200px;
     margin: 0 auto;
-    padding-top: 200px;
+    padding-top: 150px;
 }
 header p{
     margin: 0 auto;
@@ -31,6 +34,15 @@ header p{
     background-color: rgba(0, 0, 0, .2);
     color: #fff;
 }
+
+.login_only_text{
+    margin: 0 auto;
+    font-size: 1.5rem;
+    color: #fff;
+    width: 300px;
+    text-align: center;
+}
+
 .login_page{
     color: #fff;
     margin: 0 auto;
@@ -39,20 +51,110 @@ header p{
     padding: 30px 30px 10px 30px;
     margin-top: 50px;
 }
+
 .login_page .login_title{
     margin-bottom: 30px;
 }
+
+.login_page form{
+    margin: 0 auto;
+}
+
 .login_page form label{
     display: block;
     text-align: left;
     margin-bottom: 5px;
 }
+
 .login_page form input.input{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
     display: block;
     width: 100%;
+    margin-bottom: 20px;
+    padding: 10px 5px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+}
+
+input[type="password" i]{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px 5px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+}
+
+.login_button{
+    display: flex;
+    border-style: hidden;
+    background-color: #426899;
+    color: #fff;
+    padding: 5px 30px;
+    border-radius: 5px;
+    margin-left: auto;
+}
+
+.login_page p {
+    margin-top: 30px;
     margin-bottom: 20px;
 }
 
 .login_page p a{
     color: #fff;
+    font-size: 0.8rem;
 }
+
+/* ログインページここまで */
+
+/* 登録ページここから */
+
+.register_header h1{
+    padding-top: 80px;
+}
+
+.register_page{
+    margin-top: 10px;
+}
+
+/* 登録ページここまで */
+
+/* 登録完了ページここから */
+
+.added_header h1{
+    padding-top: 200px;
+}
+
+#clear p{
+    font-size: 0.85rem;
+    margin: 0;
+    line-height: 2;
+}
+
+.added_page{
+    margin-top: 10px;
+    padding: 30px 0;
+}
+
+.added_text{
+    text-align: left;
+    margin: 30px 30px 0 30px;
+}
+
+#clear .btn a{
+    display: inline-block;
+    background-color: #426899;
+    color: #fff;
+    padding: 5px 30px;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+/* 登録完了ページここまで */

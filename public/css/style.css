@@ -1,14 +1,17 @@
 @charset "utf-8";
 html{
+    height: 100%;
 }
 body{
+    height: 100%;
 }
 
 
 /* ログイン後のトップページ */
-/* header */
 header{
     background: #3C4767;
+    position: relative;
+    z-index: 100;
 }
 #container{
     color: #fff;
@@ -21,7 +24,7 @@ header{
 }
 
 #row{
-
+    height: 100%;
 }
 
 /* main content */
@@ -70,10 +73,11 @@ header{
     background-color: #3C4767;
     color: white;
     border-radius: 10px;
+    margin-bottom: 30px;
 }
 
-.btn a:last-child{
-    margin-bottom: 30px;
+.btn a.side_search_btn{
+    margin-bottom: 0;
 }
 
 .side_follow{
@@ -103,19 +107,12 @@ header{
     align-items: center;
     vertical-align: middle;
 }
-.menu{
-    flex-basis: 20%;
-}
 
 /* アコーディオンメニュー */
-.menu {
+.menu{
+    flex-basis: 20%;
     width: 100%;
     padding: 10px;
-}
-.menu input {
-    display: none; /*チェックボックスを隠す*/
-}
-.menu_label{
     cursor :pointer;
     display: block;
     text-decoration: none;
@@ -126,7 +123,8 @@ header{
     vertical-align: middle;
     height: 55px;
 }
-.menu_label p{
+
+.menu p{
     position: absolute;
     vertical-align: middle;
     top: 50%;
@@ -136,47 +134,47 @@ header{
     margin: auto;
     padding-right: 10px;
 }
-.menu_label img{
+
+.menu img{
     vertical-align: middle;
     position: absolute;
     right: 0;
 }
-.menu ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    margin-bottom: 1px;
-}
-.menu li {
-    height: 0;
-    overflow-y: hidden;
-    transition: padding-bottom 0.5s, padding-top 0.5s; /*閉じるときのアニメーション*/
-    -webkit-transition: padding-bottom 0.5s, padding-top 0.5s
-    -moz-transition: padding-bottom 0.5s, padding-top 0.5s;
-    -ms-transition: padding-bottom 0.5s, padding-top 0.5s;
-    -o-transition: padding-bottom 0.5s, padding-top 0.5s;
-}
-.menu li a{
+
+#links{
     display: block;
-    color: black;
-    text-align: center;
-    padding: 10px 0;
+    position: fixed;
+    z-index: 2;
+    transform: translateY(-100%);
+    transition: .5s ease-in-out;
+    right: 0;
+    width: 20%;
+    border-left: #d3d3d3 1px solid;
+    border-right: #d3d3d3 1px solid;
+
 }
+
+#links.active{
+    transform: translateY(0%);
+    transition: .5s ease-in-out;
+}
+
+#links li a{
+    display: block;
+    color: #696969;
+    text-align: center;
+    padding: 30px 0;
+    background-color: #fff;
+    border-bottom: #d3d3d3 1px solid;;
+}
+
 #links li a:hover{
     background-color: #ff4500;
+    color: #fff;
 }
-#menu_bar:checked ~ #links li {
-  height: auto; /*開いたときに表示されるliの高さ*/
-  opacity: 1;
-  background: #f1f1f1;
-  padding: 10px;
-}
- /*開いたときの下の余白*/
-#menu_bar:checked ~ #links li:last-child {
-  margin-bottom: 20px;
-}
-/* 閉じている時の矢印 */
-.menu_label span:after{
+
+/* 矢印クリック前 */
+.arrow:after{
     content:"";
     display:block;
     width:8px;
@@ -188,26 +186,18 @@ header{
     transform: rotate(135deg);
     position:absolute;
     right: 40%;
-    top: 0;
+    top: 15%;
     bottom: 15%;
     margin: auto;
+    transition: 0.5s;
 }
-/*開いている時の矢印*/
-.menu input[type=checkbox]:checked + .menu_label span:after{
-  content:"";
-  display:block;
-  width:8px;
-  height:8px;
-  border-top: #fff 2px solid;
-  border-right: #fff 2px solid;
-  -webkit-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  position:absolute;
-  right: 40%;
-  top: 7%;
-  bottom: 0;
-  margin: auto;
+
+/* 矢印クリック後 */
+.arrow.selected:after{
+    t-webkit-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    transform: rotate(-45deg);
+	transition: 0.5s;
 }
 
 /* ホーム画面ここから */
@@ -290,6 +280,65 @@ header{
 
 .trash_button:hover .active{
     opacity: 1;
+}
+
+/* モーダル */
+/* モーダルウィンドウを非表示にする */
+.tweet_modal{
+    display: none;
+}
+
+/* モーダル背景を画面いっぱいにし、位置を固定する */
+.inner-content{
+    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 30%;
+    background-color: #fff;
+    color: #666;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+/* モーダル内の要素全体の子要素を中央揃えにする */
+.inner-content{
+    text-align: center;
+    margin: 0;
+    padding: 30px;
+    max-width: 1024px;
+}
+
+/* タイトルは上下方向の他要素との感覚を調整 */
+.inner-title{
+  margin-top: 40px;
+  margin-bottom: 32px;
+  font-size: 2.8rem;
+  font-weight: bold;
+}
+
+/* モーダル画像の幅は親要素（.inner-content）の100％に設定する */
+.image-modal{
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+/* 紹介文の文字祭の設定・表示領域は70％で設定し、他要素との感覚調整 */
+.inner-text{
+    font-size: 1.6rem;
+    width: 70%;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+/* カーソルを設定する。（.send-button）デザインは既に設定されているので、ここでは不要 */
+.modalClose{
+    cursor: pointer;
 }
 
 /* ホーム画面ここまで */
@@ -383,3 +432,112 @@ header{
 }
 
 /* フォロー一覧、フォロワー一覧ここまで */
+
+/* ユーザー検索画面ここから */
+
+.search_wrap{
+    padding: 30px 0 30px 80px;
+    border-bottom: #d3d3d3 3px solid;
+}
+
+.search{
+    padding: 10px 0 10px 5px;
+    font-size: 1rem;
+    width: 30%;
+}
+
+.search_font{
+    color: #fff;
+    padding: 5px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.search_btn{
+    border: hidden;
+    background-color: #3C4767;
+    transform: scaleX(-1);
+    border-radius: 4px;
+}
+
+.search_list_wrap{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 50%;
+    margin-left: 100px;
+    margin-top: 30px;
+}
+
+.search_list{
+    vertical-align: middle;
+}
+
+.search_list img{
+    vertical-align: middle;
+    margin-right: 30px;
+}
+
+.search_list_username{
+    vertical-align: middle;
+}
+
+.search_list_btn{
+    /* margin-top: 19.5px; */
+}
+
+.search_list_btn a{
+    display: inline-block;
+    text-align: center;
+    padding: 20px 0;
+    width: 150px;
+    background-color: #cd5c5c;
+    color: white;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.unfollow_btn a{
+    background-color: #6495ed;
+}
+
+/* ユーザー検索画面ここまで */
+
+/* 個別ユーザーページここから */
+
+.user_profile{
+    padding: 30px 30px 30px 80px;
+    border-bottom: #d3d3d3 3px solid;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: start;
+}
+
+.user_profile p a img{
+    margin-right: 30px;
+}
+
+.user_profile_items{
+    margin-right: 50px;
+    margin-top: 10px;
+}
+
+.user_profile_items p:first-child{
+    margin-bottom: 40px;
+}
+
+.user_profile_details{
+    margin-right: 50px;
+    margin-top: 10px;
+}
+
+.user_profile_details p:first-child{
+    margin-bottom: 40px;
+}
+
+.userpage_btn{
+    margin-top: auto;
+    margin-left: auto;
+}
+
+/* 個別ユーザーページここまで */

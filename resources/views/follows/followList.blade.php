@@ -16,13 +16,12 @@
 </div>
 
 @foreach($followTweets as $followTweet)
-<br>
-<tr>
-  <td><a href="userpage/{{ $followTweet->follower }}"><img src="images/{{ $followTweet->images }}" height="55px" width="55px" class="profile_icon"></a></td>
-  <td>{{ $followTweet->username }}</td>
-  <td>{{ $followTweet->posts }}</td>
-  <td>{{ $followTweet->created_at }}</td>
-</tr>
+<div class="all_tweets">
+  <p class="tweet_image"><a href="userpage/{{ $followTweet->follower }}"><img src="images/{{ $followTweet->images }}" height="55px" width="55px" class="profile_icon"></a></p>
+  <p class="tweet_username">{{ $followTweet->username }}</p>
+  <p class="tweet_date">{{ $followTweet->created_at }}</p>
+  <p class="tweet_post">{{ $followTweet->posts }}</p>
+</div>
 @endforeach
 
 @endsection

@@ -2,29 +2,30 @@
 
 @section('content')
 
-{!! Form::open(['url' => '/users.search']) !!}
-
-{{ Form::text('search', null, ['class' => 'search', 'placeholder' => 'ユーザー名']) }}
-{{ Form::submit('') }}
-
-{!! Form::close() !!}
+<div class="search_wrap">
+  {!! Form::open(['url' => '/users.search']) !!}
+  {{ Form::text('search', null, ['class' => 'search', 'placeholder' => 'ユーザー名']) }}
+  {{ Form::button('<i class="fas fa-search search_font"></i>', ['class' => 'search_btn', 'type' => 'submit']) }}
+  {!! Form::close() !!}
+</div>
 
 @foreach($users as $user)
-<tr>
-  <td><img src="images/{{ $user->images }}" height="55px" width="55px" class="profile_icon"></td>
-  <td>{{ $user->username }}</td>
+<div class="search_list_wrap">
+  <p class="search_list">
+    <a href="/userpage/{{ $user->id }}"><img src="images/{{ $user->images }}" height="55px" width="55px" class="profile_icon"></a>
+    <span class="search_list_username">{{ $user->username }}</span>
+  </p>
+
   @if(in_array($user->id, array_column($follows, 'follower')))
-    <td>
+    <p class="search_list_btn">
       <a href="users/{{ $user->id }}/unfollow">フォローをはずす</a>
-    </td>
-    <br>
+    </p>
       @else
-      <td>
+      <p class="search_list_btn unfollow_btn">
         <a href="users/{{ $user->id }}/follow">フォローする</a>
-      </td>
-    <br>
+      </p>
   @endif
-</tr>
+</div>
 @endforeach
 
 @endsection

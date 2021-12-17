@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="ページの内容を表す文章" />
     <title></title>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!--スマホ,タブレット対応-->
@@ -20,22 +21,24 @@
     <!--OGPタグ/twitterカード-->
     <!-- jQuery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="js/script.js"></script>
 </head>
 <body>
     <header>
         <div id = "head">
             <h1 class="logo"><a href="/index"><img src="{{ asset('images/main_logo.png') }}"></a></h1>
             <div class="menu">
-                <input id="menu_bar" type="checkbox">
-                <label class="menu_label" for="menu_bar"><p>{{ Auth::user() -> username }}さん</p><span></span><img src="{{ asset('images/'. Auth::user()->images) }}" height="55px" width="55px" class="profile_icon"></label>
-                <ul id="links">
-                    <li><a href="/index">ホーム</a></li>
-                    <li><a href="/profile">プロフィール編集</a></li>
-                    <li><a href="{{ route('/logout') }}">ログアウト</a></li>
-                </ul>
+                <p>{{ Auth::user() -> username }}さん</p>
+                <span class="arrow"></span>
+                <img src="{{ asset('images/'. Auth::user()->images) }}" height="55px" width="55px" class="profile_icon">
             </div>
         </div>
     </header>
+    <ul id="links">
+        <li><a href="/index">ホーム</a></li>
+        <li><a href="/profile">プロフィール編集</a></li>
+        <li><a href="{{ route('/logout') }}">ログアウト</a></li>
+    </ul>
     <div id="row">
         <div id="container">
             @yield('content')
@@ -54,7 +57,7 @@
                 </div>
                 <p class="btn"><a href="/follows.followerList">フォロワーリスト</a></p>
             </div>
-            <p class="btn side_search"><a href="/users.search">ユーザー検索</a></p>
+            <p class="btn side_search"><a href="/users.search" class="side_search_btn">ユーザー検索</a></p>
         </div>
     </div>
     <footer>
