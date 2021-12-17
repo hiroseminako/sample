@@ -11,7 +11,7 @@ body{
 header{
     background: #3C4767;
     position: relative;
-    z-index: 100;
+    z-index: 3;
 }
 #container{
     color: #fff;
@@ -297,11 +297,13 @@ header{
     width: 50%;
     height: 30%;
     background-color: #fff;
+    border-radius: 3px;
+    border: #d3d3d3 1px solid;
     color: #666;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 5;
 }
 
 /* モーダル内の要素全体の子要素を中央揃えにする */
@@ -310,6 +312,23 @@ header{
     margin: 0;
     padding: 30px;
     max-width: 1024px;
+}
+
+.tweet_update{
+    width: 500px;
+    height: 120px;
+}
+
+/* モーダルの外側　クリックしたらモーダル消える */
+#modal-bg{
+    display:none;
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.5);
+    position:fixed;
+    top:0;
+    left:0;
+    z-index: 4;
 }
 
 /* タイトルは上下方向の他要素との感覚を調整 */
