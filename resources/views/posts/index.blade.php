@@ -30,7 +30,6 @@
         <a href="/index/{{ $comment->id }}/delete" class="trash_button"><img src="images/trash.png"><img src="images/trash_h.png" class="active" onclick="return confirm('このつぶやきを削除します。よろしいでしょうか？')"></a>
 
         <div class="tweet_modal js-modal" id="modal">
-          <div class="inner-content">
           {!! Form::open(['url' => '/index/{$comment->id}/edit']) !!}
           {{ Form::text('tweet_update', $comment->posts, ['class' => 'tweet_update'])}}
           {{ Form::image('images/edit.png', 'image', ['class' => 'tweet_update_button']) }}
@@ -39,7 +38,6 @@
           {{ $errors->first('tweet_update') }}
           @endif
           {!! Form::close() !!}
-          </div>
         </div>
 
       </div>

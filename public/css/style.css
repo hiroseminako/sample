@@ -145,7 +145,7 @@ header{
     display: block;
     position: fixed;
     z-index: 2;
-    transform: translateY(-100%);
+    transform: translateY(-150%);
     transition: .5s ease-in-out;
     right: 0;
     width: 20%;
@@ -283,19 +283,12 @@ header{
 }
 
 /* モーダル */
-/* モーダルウィンドウを非表示にする */
 .tweet_modal{
-    display: none;
-}
-
-/* モーダル背景を画面いっぱいにし、位置を固定する */
-.inner-content{
     overflow-y: hidden;
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: 50%;
     height: 30%;
+    text-align: center;
     background-color: #fff;
     border-radius: 3px;
     border: #d3d3d3 1px solid;
@@ -304,19 +297,11 @@ header{
     top: 0;
     left: 0;
     z-index: 5;
-}
-
-/* モーダル内の要素全体の子要素を中央揃えにする */
-.inner-content{
-    text-align: center;
-    margin: 0;
     padding: 30px;
-    max-width: 1024px;
 }
 
-.tweet_update{
-    width: 500px;
-    height: 120px;
+.tweet_modal{
+    display: none;
 }
 
 /* モーダルの外側　クリックしたらモーダル消える */
@@ -339,26 +324,23 @@ header{
   font-weight: bold;
 }
 
-/* モーダル画像の幅は親要素（.inner-content）の100％に設定する */
-.image-modal{
-    width: 100%;
-    margin: 0 auto;
-    margin-bottom: 10px;
+.tweet_update{
+    display: table-cell;
+    vertical-align: top;
+    width: 90%;
+    height: 25vh;
+    white-space: normal; /* 文字がはみ出た時のルールを文字送りに指定 */
 }
 
-/* 紹介文の文字祭の設定・表示領域は70％で設定し、他要素との感覚調整 */
-.inner-text{
-    font-size: 1.6rem;
-    width: 70%;
-    text-align: center;
-    margin: 0 auto;
-    margin-bottom: 20px;
+.tweet_update_button{
+    display: block;
+    margin-left: auto;
 }
 
-/* カーソルを設定する。（.send-button）デザインは既に設定されているので、ここでは不要 */
-.modalClose{
+/* カーソルを設定する。*/
+/* .modalClose{
     cursor: pointer;
-}
+} */
 
 /* ホーム画面ここまで */
 
