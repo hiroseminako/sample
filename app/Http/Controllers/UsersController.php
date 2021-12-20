@@ -212,7 +212,7 @@ class UsersController extends Controller
     // ログアウト
     public function logout()
     {
-        // unset($_SESSION);取得したユーザーデータの削除（sessionを使う)
+        session()->forget('key');
         Auth::logout();
         return redirect('login');
     }

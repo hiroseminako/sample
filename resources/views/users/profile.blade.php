@@ -52,7 +52,7 @@
     <br>
     <tr>
       <!-- <td>Bio</td> -->
-      <td>{{ Form::text('bio', null, ['class' => 'profile_bio']) }}</td>
+      <td>{{ Form::textarea('bio', $user->bio, ['class' => 'profile_bio']) }}</td>
       @if($errors->has('bio'))
       {{ $errors->first('bio')}}
       @endif
