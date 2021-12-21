@@ -65,6 +65,7 @@ Route::get('/index','PostsController@timeLine');
 Route::post('/index','PostsController@create');
 
 // つぶやき更新
+// Route::post('/index/{id}/update','PostsController@edit');
 Route::post('/index/{id}/edit','PostsController@update');
 
 // つぶやき削除

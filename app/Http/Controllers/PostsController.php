@@ -62,13 +62,22 @@ class PostsController extends Controller
         $user = Auth::user();
         $comments = \DB::table('posts')
         ->join('users', 'posts.user_id', '=', 'users.id')
-        ->select('users.username', 'posts.posts', 'users.images', 'posts.created_at', 'posts.id')
+        ->select('users.username', 'posts.user_id', 'posts.posts', 'users.images', 'posts.created_at', 'posts.id')
         ->orderBy('posts.created_at', 'desc')
         ->get();
         return view('posts.index', ['user' => $user, 'comments' => $comments]);
     }
 
-    // つぶやきの更新
+    // つぶやきを更新
+    // public function edit($id)
+    // {
+    //     $edit = \DB::table('posts')
+    //     ->where('id', $id)
+    //     ->select('id', 'posts')
+    //     ->first();
+    //     return back(['edit' => $edit]);
+    // }
+
     public function update(Request $request)
     {
         $tweet_update = $request->input('tweet_update');
@@ -96,9 +105,10 @@ class PostsController extends Controller
     }
 
     // つぶやきの削除
-    public function delete()
+    public function delete($id)
     {
         \DB::table('posts')
+        ->where('id', $id)
         ->delete();
         return back();
     }

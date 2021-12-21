@@ -28,6 +28,10 @@ $(function () {
     //body内の最後に<div id="modal-bg"></div>を挿入
     $('body').append('<div id="modal-bg"></div>');
 
+    // var target = $(this).data('target');
+    // var modal = document.getElementById(target);
+    // modal.find('.tweet_update').val(recipient);
+
     //画面中央を計算する関数を実行
     modalResize();
 
@@ -40,10 +44,9 @@ $(function () {
         //挿入した<div id="modal-bg"></div>を削除
         $('#modal-bg').remove();
       });
-
     });
 
-    //画面の左上からmodal-mainの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
+    //modalを画面中央に配置
     $(window).resize(modalResize);
     function modalResize() {
 
