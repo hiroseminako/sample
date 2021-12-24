@@ -7,6 +7,9 @@
   {{ Form::text('search', null, ['class' => 'search', 'placeholder' => 'ユーザー名']) }}
   {{ Form::button('<i class="fas fa-search search_font"></i>', ['class' => 'search_btn', 'type' => 'submit']) }}
   {!! Form::close() !!}
+  @if(isset($search))
+  <p class="search_word">検索ワード：{{ $search }}</p>
+  @endif
 </div>
 
 @foreach($users as $user)

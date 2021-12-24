@@ -26,7 +26,7 @@
 
       <div class="tweet_update_wrap">
 
-        <img class="edit_button" data-target="#modal_{{ $comment->id }}" src="images/edit.png">
+        <img class="edit_button" data-target="modal_{{ $comment->id }}" src="images/edit.png">
         <a href="/index/{{ $comment->id }}/delete" class="trash_button"><img src="images/trash.png"><img src="images/trash_h.png" class="active" onclick="return confirm('このつぶやきを削除します。よろしいでしょうか？')"></a>
 
         <div class="tweet_modal" id="modal_{{ $comment->id }}">

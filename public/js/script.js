@@ -14,7 +14,7 @@ $(function () {
   });
 });
 
-// 矢印回転
+// アコーディオンの矢印回転
 $(function () {
   $('.menu').click(function () {
     $('.arrow').toggleClass('selected');
@@ -23,27 +23,30 @@ $(function () {
 
 // モーダルウィンドウ
 $(function () {
-  //テキストリンクをクリックしたら
-  $('.edit_button').click(function () {
-    //body内の最後に<div id="modal-bg"></div>を挿入
-    $('body').append('<div id="modal-bg"></div>');
+  // 編集ボタンをクリックしたら
+  $('.edit_button').each(function () {
+    $(this).on('click', function () {
 
-    // var target = $(this).data('target');
-    // var modal = document.getElementById(target);
-    // modal.find('.tweet_update').val(recipient);
+      // bodyの一番下に<div>を追加
+      $('body').append('<div id="modal-bg"></div>');
+      modalResize();
 
-    //画面中央を計算する関数を実行
-    modalResize();
+      //モーダルウィンドウを表示
+      var target = $(this).data('target');
+      var modal = document.getElementById(target);
+      console.log(modal);
+      $(modal).fadeIn('slow');
 
-    //モーダルウィンドウを表示
-    $('#modal-bg, .tweet_modal').fadeIn('slow');
-
-    //画面のどこかをクリックしたらモーダルを閉じる
-    $('#modal-bg').click(function () {
-      $('#modal-bg, .tweet_modal').fadeOut('slow', function () {
-        //挿入した<div id="modal-bg"></div>を削除
-        $('#modal-bg').remove();
+      //画面のどこかをクリックしたらモーダルを閉じる
+      $('#modal-bg').click(function () {
+        $('#modal-bg, .tweet_modal').fadeOut('slow', function () {
+          //挿入した<div id="modal-bg"></div>を削除
+          $('#modal-bg').remove();
+        });
       });
+
+      return false;
+
     });
 
     //modalを画面中央に配置
@@ -62,5 +65,6 @@ $(function () {
         "top": ((h - ch) / 3) + "px"
       });
     }
+
   });
 });
