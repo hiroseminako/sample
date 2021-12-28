@@ -19,30 +19,31 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 
-//ログアウト中のページ
+//ログアウトする画面（ログアウト中画面）
 Route::get('/login', 'Auth\LoginController@login');
 Route::post('/login', 'Auth\LoginController@login');
 
+// 登録画面
 Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
 
+// 登録完了後画面
 Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
-Route::post('/added', 'Auth\RegisterController@added');
-
-//ログイン中のページ
+//トップページ
 Route::get('/index','PostsController@index');
 
 // プロフィール編集画面
 Route::get('/profile', 'UsersController@profile');
 Route::post('/profile', 'UsersController@update');
 
+// トップページの右側カラム
 Route::get('/search','UsersController@index');
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
 
-// フォロー数、フォロワー数
+// トップページのフォロー数、フォロワー数
 Route::get('/index', 'FollowsController@show');
 
 // フォローリスト一覧
@@ -55,17 +56,17 @@ Route::get('userpage/{id}', 'UsersController@userPage');
 // 検索ページ
 Route::get('users.search', 'UsersController@search');
 Route::post('users.search', 'UsersController@search');
+
 // フォローする
 Route::get('users/{id}/follow', 'UsersController@follow');
 // フォローを外す
 Route::get('users/{id}/unfollow', 'UsersController@unfollow');
 
-// つぶやき表示
+// トップページのつぶやき表示
 Route::get('/index','PostsController@timeLine');
 Route::post('/index','PostsController@create');
 
 // つぶやき更新
-// Route::post('/index/{id}/update','PostsController@edit');
 Route::post('/index/{id}/edit','PostsController@update');
 
 // つぶやき削除
@@ -76,27 +77,3 @@ Route::get('/logout', [
     'uses' => 'UsersController@logout',
     'as' => '/logout'
 ]);
-
-
-
-
-
-
-
-// Route::group(['prefix' => 'user'], function() {
-
-//   Route::group(['middleware' => 'auth'], function(){
-
-//   // ユーザープロファイル
-//   Route::get('/profile',[
-//     'uses' => 'UserController@getProfile',
-//     'as' => 'user.profile'
-//   ]);
-
-//   // ログアウト
-//   Route::get('/logout',[
-//     'uses' => 'UserController@getLogout',
-//     'as' => 'user.logout'
-//   ]);
-
-// });

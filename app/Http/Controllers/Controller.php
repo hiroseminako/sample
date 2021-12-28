@@ -24,6 +24,8 @@ class Controller extends BaseController
             $follower_count = Follow::where('follower', '=', Auth::id())->count();
             //フォローのカウント
             $follow_count = Follow::where('follow', '=', Auth::id())->count();
+
+            // サイト全体（全てのview）で指定した値（上記で設定した変数）を使える
             View::share('username', $username['username']);
             View::share('follower_count', $follower_count);
             View::share('follow_count', $follow_count);

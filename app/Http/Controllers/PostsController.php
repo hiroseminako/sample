@@ -69,15 +69,6 @@ class PostsController extends Controller
     }
 
     // つぶやきを更新
-    // public function edit($id)
-    // {
-    //     $edit = \DB::table('posts')
-    //     ->where('id', $id)
-    //     ->select('id', 'posts')
-    //     ->first();
-    //     return back(['edit' => $edit]);
-    // }
-
     public function update(Request $request)
     {
         $tweet_update = $request->input('tweet_update');

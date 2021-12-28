@@ -45,7 +45,9 @@ class FollowsController extends Controller
         ->orderBy('posts.created_at', 'desc')
         ->get();
         return view('follows.followList')->with(['follows' => $follows, 'followTweets' => $followTweets]);
-        return view('/profile')->with(['follows' => $follows, 'followTweets' => $followTweets]);
+
+        // userpage用のコントローラー書き換え済み
+        // return view('/profile')->with(['follows' => $follows, 'followTweets' => $followTweets]);
     }
 
     // フォロワー一覧
@@ -64,6 +66,8 @@ class FollowsController extends Controller
         ->orderBy('posts.created_at', 'desc')
         ->get();
         return view('follows.followerList')->with(['followers' => $followers, 'followerTweets' => $followerTweets]);
-        return view('follows.followerList')->with(['followers' => $followers, 'followerTweets' => $followerTweets]);
+
+        // userpage用のコントローラー書き換え済み
+        // return view('follows.followerList')->with(['followers' => $followers, 'followerTweets' => $followerTweets]);
     }
 }

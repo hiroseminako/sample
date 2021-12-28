@@ -59,11 +59,14 @@ class UsersController extends Controller
         }
 
         // NewパスワードとProfile画像のアップデートとそれ以外に分ける
+
         // NewパスワードとProfile画像のアップデート
         else{
             if(isset($new_password) && isset($images))
             {
+                // getClientOriginalNameでファイル名の取得
             $filename = $images->getClientOriginalName();
+            // config > filesystem.phpにiconの保存先などを記載
             $images->storeAs('images', $filename, 'icon');
             \DB::table('users')
             ->where('id', Auth::id())
@@ -137,9 +140,11 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $follower = Auth::user();
+        // isFollowingはUser.phpで定義
         $is_following = $follower->isFollowing($user->id);
         // フォローしていなければフォローする
         if(!$is_following){
+            // followはUser.phpで定義
             $follower->follow($user->id);
         }
         return back();
@@ -150,9 +155,11 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $follower = Auth::user();
+        // isFollowingはUser.phpで定義
         $is_following = $follower->isFollowing($user->id);
         // フォローしていればフォロー解除
         if($is_following){
+            // unfollowはUser.phpで定義
             $follower->unfollow($user->id);
         }
         return back();

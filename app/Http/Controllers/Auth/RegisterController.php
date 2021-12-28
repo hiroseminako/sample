@@ -53,8 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'username' => 'required|string|min:1|max:255',
             'mail' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:4|confirmed',
-            // 'password-confirm' => 'required|string|min:4'
+            'password' => 'required|string|min:4|confirmed'
         ],[
             'username.required' => '名前を入力してください',
             'username.string' => '名前を文字列で入力してください',
@@ -62,9 +61,7 @@ class RegisterController extends Controller
             'mail.email' => 'アドレス形式で入力してください',
             'password.required' => 'パスワードを入力してください',
             'password.min:4' => '4パスワードは文字以上で入力してください',
-            'password.confirmed' => 'パスワードは同じものを入力してください',
-            // 'password-confirm.required' => 'パスワードを入力してください',
-            // 'password-confirm.min:4' => 'パスワードは4文字以上で入力してください'
+            'password.confirmed' => 'パスワードは同じものを入力してください'
         ]);
     }
 
@@ -79,8 +76,7 @@ class RegisterController extends Controller
         return User::create([
             'username' => $data['username'],
             'mail' => $data['mail'],
-            'password' => bcrypt($data['password']),
-            // 'password-confirm' => bcrypt($data['password-confirm'])
+            'password' => bcrypt($data['password'])
         ]);
     }
 

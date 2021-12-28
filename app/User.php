@@ -27,13 +27,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // フォロワーの取得
+    // フォロワーの取得（リレーション）
     public function followers(){
+        // 第一引数：使用するモデル（User.php）
+        // 第二引数：使用するテーブル名（followsテーブル）
+        // 第三引数：リレーションを定義しているモデルの外部キー名（follower（フォロワーのid））
+        // 第四引数：結合するモデルの外部キー名
         return $this->belongsToMany(self::class, 'follows', 'follower', 'follow');
     }
 
-    // フォローしているユーザーの取得
+    // フォローしているユーザーの取得（リレーション）
     public function follows(){
+        // 第一引数：使用するモデル（User.php）
+        // 第二引数：使用するテーブル名（followsテーブル）
+        // 第三引数：リレーションを定義しているモデルの外部キー名（follow（フォローしているユーザーのid））
+        // 第四引数：結合するモデルの外部キー名
         return $this->belongsToMany(self::class, 'follows', 'follow', 'follower');
     }
 
@@ -52,12 +60,14 @@ class User extends Authenticatable
     // フォローしているか
     public function isFollowing(Int $user_id)
     {
+        // booleanで真偽の判定、existsメソッドでfollowerが存在しているか確認
         return (boolean) $this->follows()->where('follower', $user_id)->exists();
     }
 
     // フォローされているか
     public function isFollowed(Int $user_id)
     {
+        // booleanで真偽の判定、existsメソッドでfollowが存在しているか確認
         return (boolean) $this->followers()->where('follow', $user_id)->exists();
     }
 
